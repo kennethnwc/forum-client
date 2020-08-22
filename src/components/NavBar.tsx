@@ -6,6 +6,7 @@ export default function NavBar() {
   const [{ fetching: logoutFetching }, logout] = useLogoutMutation();
   const [{ data, fetching }] = useMeQuery();
   let body = null;
+
   //data loding
   if (fetching) {
   }
