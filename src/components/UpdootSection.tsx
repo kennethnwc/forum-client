@@ -16,10 +16,14 @@ export const UpdootSection: React.FC<Props> = ({ post }) => {
     <Flex direction="column" alignItems="center" justifyContent="center" mr={4}>
       <IconButton
         onClick={async () => {
+          if (post.voteStatus === 1) {
+            return;
+          }
           setLoading("updoot-loading");
           await vote({ postId: post.id, value: 1 });
           setLoading("not-loading");
         }}
+        variantColor={post.voteStatus === 1 ? "green" : undefined}
         icon="chevron-up"
         aria-label="Up vote"
         isLoading={loading === "updoot-loading"}
@@ -27,9 +31,13 @@ export const UpdootSection: React.FC<Props> = ({ post }) => {
       {post.points}
       <IconButton
         icon="chevron-down"
+        variantColor={post.voteStatus === -1 ? "red" : undefined}
         aria-label="Down vote"
         isLoading={loading === "downdoot-loading"}
         onClick={async () => {
+          if (post.voteStatus === -1) {
+            return;
+          }
           setLoading("downdoot-loading");
           await vote({ postId: post.id, value: -1 });
           setLoading("not-loading");
