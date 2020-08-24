@@ -1,28 +1,18 @@
-import {
-  Box,
-  Heading,
-  Link,
-  Stack,
-  Text,
-  Flex,
-  Button,
-  Icon,
-  IconButton,
-} from "@chakra-ui/core";
+import { Box, Button, Flex, Heading, Link, Stack, Text } from "@chakra-ui/core";
 import { withUrqlClient } from "next-urql";
 import NextLink from "next/link";
-import { Layout } from "../components/Layout";
-import { usePostQuery } from "../generated/graphql";
-import { createUrqlClient } from "../utils/createUrqlClient";
 import { useState } from "react";
+import { Layout } from "../components/Layout";
 import { UpdootSection } from "../components/UpdootSection";
+import { usePostsQuery } from "../generated/graphql";
+import { createUrqlClient } from "../utils/createUrqlClient";
 
 const Index = () => {
   const [variables, setVariables] = useState({
     limit: 15,
     cursor: null as null | string,
   });
-  const [{ data, fetching }] = usePostQuery({ variables });
+  const [{ data, fetching }] = usePostsQuery({ variables });
 
   if (!fetching && !data) {
     return <div>No Posts </div>;

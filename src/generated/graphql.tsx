@@ -264,13 +264,13 @@ export type MeQuery = (
   )> }
 );
 
-export type PostQueryVariables = Exact<{
+export type PostsQueryVariables = Exact<{
   limit: Scalars['Int'];
   cursor?: Maybe<Scalars['String']>;
 }>;
 
 
-export type PostQuery = (
+export type PostsQuery = (
   { __typename?: 'Query' }
   & { posts: (
     { __typename?: 'PaginatedPosts' }
@@ -409,8 +409,8 @@ export const MeDocument = gql`
 export function useMeQuery(options: Omit<Urql.UseQueryArgs<MeQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<MeQuery>({ query: MeDocument, ...options });
 };
-export const PostDocument = gql`
-    query Post($limit: Int!, $cursor: String) {
+export const PostsDocument = gql`
+    query Posts($limit: Int!, $cursor: String) {
   posts(limit: $limit, cursor: $cursor) {
     hasMore
     posts {
@@ -420,6 +420,6 @@ export const PostDocument = gql`
 }
     ${PostSnippetFragmentDoc}`;
 
-export function usePostQuery(options: Omit<Urql.UseQueryArgs<PostQueryVariables>, 'query'> = {}) {
-  return Urql.useQuery<PostQuery>({ query: PostDocument, ...options });
+export function usePostsQuery(options: Omit<Urql.UseQueryArgs<PostsQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<PostsQuery>({ query: PostsDocument, ...options });
 };
