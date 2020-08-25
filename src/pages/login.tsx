@@ -1,13 +1,12 @@
-import { Box, Button, Link, Flex } from "@chakra-ui/core";
+import { Box, Button, Flex, Link } from "@chakra-ui/core";
 import { Form, Formik } from "formik";
-import { withUrqlClient } from "next-urql";
+import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { InputField } from "../components/InputField";
 import Wrapper from "../components/Wrapper";
 import { useLoginMutation } from "../generated/graphql";
-import { createUrqlClient } from "../utils/createUrqlClient";
 import { toErrorMap } from "../utils/toErrorMap";
-import NextLink from "next/link";
+import { withApollo } from "../utils/withApollo";
 
 const Login: React.FC = () => {
   const router = useRouter();
@@ -67,4 +66,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default withApollo({ ssr: false })(Login);

@@ -3,6 +3,7 @@ import React from "react";
 import { EditDeletePostButtons } from "../../components/EditDeletePostButtons";
 import { Layout } from "../../components/Layout";
 import { useGetPostFromUrl } from "../../utils/useGetPostFromUrl";
+import { withApollo } from "../../utils/withApollo";
 
 interface Props {}
 
@@ -36,4 +37,4 @@ const Post: React.FC<Props> = () => {
   );
 };
 
-export default Post;
+export default withApollo({ ssr: true })(Post);

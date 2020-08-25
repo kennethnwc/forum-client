@@ -6,10 +6,11 @@ import { InputField } from "../../../components/InputField";
 import { Layout } from "../../../components/Layout";
 import {
   usePostQuery,
-  useUpdatePostMutation
+  useUpdatePostMutation,
 } from "../../../generated/graphql";
 import { useGetIntId } from "../../../utils/useGetIntId";
 import { useIsAuth } from "../../../utils/useIsAuth";
+import { withApollo } from "../../../utils/withApollo";
 
 const EditPost = () => {
   useIsAuth();
@@ -82,4 +83,4 @@ const EditPost = () => {
   );
 };
 
-export default EditPost;
+export default withApollo({ ssr: false })(EditPost);
