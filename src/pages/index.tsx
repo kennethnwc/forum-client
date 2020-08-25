@@ -11,7 +11,7 @@ const Index = () => {
       limit: 15,
       cursor: null,
     },
-    notifyOnNetworkStatusChange: true,
+    notifyOnNetworkStatusChange: true, // make the loading button work
   });
 
   if (!loading && !data) {
@@ -63,22 +63,22 @@ const Index = () => {
                   cursor:
                     data.posts.posts[data.posts.posts.length - 1].createdAt,
                 },
-                updateQuery: (prev, { fetchMoreResult }): PostsQuery => {
-                  if (!fetchMoreResult) {
-                    return prev as PostsQuery;
-                  }
-                  return {
-                    __typename: "Query",
-                    posts: {
-                      __typename: "PaginatedPosts",
-                      hasMore: (fetchMoreResult as PostsQuery).posts.hasMore,
-                      posts: [
-                        ...(prev as PostsQuery).posts.posts,
-                        ...(fetchMoreResult as PostsQuery).posts.posts,
-                      ],
-                    },
-                  };
-                },
+                // updateQuery: (prev, { fetchMoreResult }): PostsQuery => {
+                //   if (!fetchMoreResult) {
+                //     return prev as PostsQuery;
+                //   }
+                //   return {
+                //     __typename: "Query",
+                //     posts: {
+                //       __typename: "PaginatedPosts",
+                //       hasMore: (fetchMoreResult as PostsQuery).posts.hasMore,
+                //       posts: [
+                //         ...(prev as PostsQuery).posts.posts,
+                //         ...(fetchMoreResult as PostsQuery).posts.posts,
+                //       ],
+                //     },
+                //   };
+                // },
               });
             }}
             isLoading={loading}
