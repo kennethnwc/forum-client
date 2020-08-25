@@ -1,6 +1,6 @@
 import { Flex, IconButton } from "@chakra-ui/core";
-import { PostSnippetFragment, useVoteMutation } from "../generated/graphql";
 import { useState } from "react";
+import { PostSnippetFragment, useVoteMutation } from "../generated/graphql";
 
 interface Props {
   //   post: PostQuery["posts"]["posts"][0];
@@ -11,7 +11,7 @@ export const UpdootSection: React.FC<Props> = ({ post }) => {
   const [loading, setLoading] = useState<
     "updoot-loading" | "downdoot-loading" | "not-loading"
   >("not-loading");
-  const [, vote] = useVoteMutation();
+  const [vote] = useVoteMutation();
   return (
     <Flex direction="column" alignItems="center" justifyContent="center" mr={4}>
       <IconButton
@@ -20,7 +20,7 @@ export const UpdootSection: React.FC<Props> = ({ post }) => {
             return;
           }
           setLoading("updoot-loading");
-          await vote({ postId: post.id, value: 1 });
+          await vote({ variables: { postId: post.id, value: 1 } });
           setLoading("not-loading");
         }}
         variantColor={post.voteStatus === 1 ? "green" : undefined}
@@ -39,7 +39,7 @@ export const UpdootSection: React.FC<Props> = ({ post }) => {
             return;
           }
           setLoading("downdoot-loading");
-          await vote({ postId: post.id, value: -1 });
+          await vote({ variables: { postId: post.id, value: -1 } });
           setLoading("not-loading");
         }}
       ></IconButton>
