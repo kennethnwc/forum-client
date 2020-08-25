@@ -25,7 +25,12 @@ export const EditDeletePostButtons: React.FC<Props> = ({ id, creatorId }) => {
         icon="delete"
         aria-label="delete post"
         onClick={() => {
-          deletePost({ variables: { id } });
+          deletePost({
+            variables: { id },
+            update: (cache) => {
+              cache.evict({ id: "Post:" + id });
+            },
+          });
         }}
       />
     </Box>
