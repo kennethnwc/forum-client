@@ -1,14 +1,9 @@
-import { cacheExchange, Resolver, Cache } from "@urql/exchange-graphcache";
+import { Cache, cacheExchange, Resolver } from "@urql/exchange-graphcache";
+import gql from "graphql-tag";
 import Router from "next/router";
-import {
-  debugExchange,
-  Exchange,
-  fetchExchange,
-  stringifyVariables,
-} from "urql";
+import { Exchange, fetchExchange, stringifyVariables } from "urql";
 import { pipe, tap } from "wonka";
 import {
-  DeletePostMutation,
   DeletePostMutationVariables,
   LoginMutation,
   LogoutMutation,
@@ -18,7 +13,6 @@ import {
   VoteMutationVariables,
 } from "../generated/graphql";
 import { betterUpdateQuery } from "./betterUpdateQuery";
-import gql from "graphql-tag";
 import { isServer } from "./isServer";
 
 const errorExchange: Exchange = ({ forward }) => (ops$) => {
